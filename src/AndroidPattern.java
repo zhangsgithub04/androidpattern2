@@ -4,18 +4,24 @@ import java.util.LinkedList;
 
 /**
  * Created by ZHANGS on 2/19/2018.
+ * https://stackoverflow.com/questions/6979524/android-lock-password-combinations
+
+
  */
+
+
 public class AndroidPattern {
     static ArrayList<ArrayList<Integer>> paths;
     static ArrayList <Integer> nodes;
-
+    static int size;
 
     static void initialize()
     {
+        size=9;
         violate.initialize();
         paths=new ArrayList<ArrayList<Integer>>();
         nodes=new ArrayList<Integer>();
-        for (int i=1; i<=9; i++)
+        for (int i=1; i<=size; i++)
         {
             nodes.add(new Integer(i));
 
@@ -59,7 +65,7 @@ public class AndroidPattern {
     {
         ArrayList<Integer> path=new ArrayList<Integer>();
         Deque<ArrayList<Integer>> q = new LinkedList<ArrayList<Integer>>();
-
+        paths.clear();
         for (int i=0; i< nodes.size(); i++)
         {
             ArrayList<Integer> sl=new ArrayList<Integer>();
@@ -76,7 +82,8 @@ public class AndroidPattern {
                 continue;
             }
 
-            for (int node=1; node<=9; node++)
+            for (int node=1; node<=size; node++)
+                //if (can_permute(path, node))
                 if (can_move(path, node))
                 {
                     ArrayList<Integer> newpath=new ArrayList<Integer>();
@@ -95,7 +102,7 @@ public class AndroidPattern {
       static public void findthem()
         {
             int total=0;
-            for(int i=1; i<=9; i++)
+            for(int i=4; i<=size; i++)
             {
                 int n=num_paths(i);
                 total+=n;
